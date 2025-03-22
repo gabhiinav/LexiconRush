@@ -398,23 +398,20 @@ export default function LexiconRush() {
       {/* Controls */}
       <div className="flex gap-4">
         <button
-          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={submitWord}
-          disabled={selectedTiles.length === 0 || gameOver}
+          className="px-4 py-2 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={selectedTiles.length < 2 || gameOver}
         >
           Submit Word
         </button>
         <button
-          className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800"
           onClick={() => {
             setSelectedTiles([]);
             setTiles((prevTiles) =>
-              prevTiles.map((tile) => ({
-                ...tile,
-                selected: false,
-              }))
+              prevTiles.map((tile) => ({ ...tile, selected: false }))
             );
           }}
+          className="px-4 py-2 bg-gray-700 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={selectedTiles.length === 0 || gameOver}
         >
           Clear Selection

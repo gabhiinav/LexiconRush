@@ -1,7 +1,7 @@
 "use client";
 
-import LexiconRush from "./components/LexiconRush";
-import GameInstructions from "./components/GameInstructions";
+import LexiconRush from "../components/LexiconRush";
+import GameInstructions from "../components/GameInstructions";
 
 export default function Home() {
   return (
