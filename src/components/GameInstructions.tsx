@@ -23,13 +23,10 @@ export default function GameInstructions() {
             <li>Click letters to form words (minimum 2 letters)</li>
             <li>Submit valid words to clear those letters from the board</li>
             <li>New letters will flood the board over time</li>
-            <li>
-              Game ends when the board fills up completely or time runs out
-            </li>
+            <li>Game ends when the board fills up completely</li>
             <li>Longer words score more points!</li>
           </ul>
           <div className="mt-2 text-xs text-gray-400">
-            <p>The board will fill up in 3 minutes if you do nothing.</p>
             <p>
               Scoring: 2-letter word = 1 point, 3-letter word = 2 points,
               4-letter word = 4 points, etc.

@@ -11,14 +11,12 @@ interface Tile {
 }
 
 const BOARD_SIZE = 6;
-const GAME_DURATION = 180; // 3 minutes in seconds
 const LETTER_SPAWN_INTERVAL = 2000; // 2 seconds
 
 export default function LexiconRush() {
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [selectedTiles, setSelectedTiles] = useState<Tile[]>([]);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(GAME_DURATION);
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState("");
   const [dictionary, setDictionary] = useState<Set<string>>(new Set());
@@ -129,21 +127,9 @@ export default function LexiconRush() {
       addNewTile();
     }, LETTER_SPAWN_INTERVAL);
 
-    // Set up timer
-    const timerInterval = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
-          setGameOver(true);
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-
-    // Clean up intervals
+    // Clean up interval
     return () => {
       clearInterval(tileInterval);
-      clearInterval(timerInterval);
     };
   }, [gameOver, addNewTile, tiles.length]);
 
@@ -221,23 +207,14 @@ export default function LexiconRush() {
     setTiles([]);
     setSelectedTiles([]);
     setScore(0);
-    setTimeLeft(GAME_DURATION);
     setGameOver(false);
     setMessage("");
-  };
-
-  // Format time as MM:SS
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto">
       <div className="mb-4 w-full flex justify-between items-center">
         <div className="text-xl font-bold">Score: {score}</div>
-        <div className="text-xl font-bold">Time: {formatTime(timeLeft)}</div>
       </div>
 
       {/* Game board */}
