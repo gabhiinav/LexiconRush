@@ -13,7 +13,11 @@ interface Tile {
 const BOARD_SIZE = 6;
 const LETTER_SPAWN_INTERVAL = 2000; // 2 seconds
 
-export default function LexiconRush() {
+interface LexiconRushProps {
+  onScoreChange?: (score: number) => void;
+}
+
+export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [selectedTiles, setSelectedTiles] = useState<Tile[]>([]);
   const [score, setScore] = useState(0);
@@ -176,7 +180,16 @@ export default function LexiconRush() {
     if (dictionary.has(word)) {
       // Valid word - remove tiles and add score
       const wordScore = Math.pow(2, selectedTiles.length - 1); // Exponential scoring for longer words
-      setScore((prevScore) => prevScore + wordScore);
+      setScore((prevScore) => {
+        return prevScore + wordScore;
+      });
+
+      // Update the score in the parent component outside of the setState function
+      const newScore = score + wordScore;
+      if (onScoreChange) {
+        // Use setTimeout to ensure this happens after the current render cycle
+        setTimeout(() => onScoreChange(newScore), 0);
+      }
 
       // Remove the selected tiles
       const selectedIds = new Set(selectedTiles.map((tile) => tile.id));
@@ -209,14 +222,15 @@ export default function LexiconRush() {
     setScore(0);
     setGameOver(false);
     setMessage("");
+
+    // Notify parent component about score reset if callback exists
+    if (onScoreChange) {
+      onScoreChange(0);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto">
-      <div className="mb-4 w-full flex justify-between items-center">
-        <div className="text-xl font-bold">Score: {score}</div>
-      </div>
-
       {/* Game board */}
       <div className="grid grid-cols-6 gap-1 mb-4 w-full aspect-square bg-black p-2 rounded-lg border border-gray-800">
         {Array.from({ length: BOARD_SIZE * BOARD_SIZE }).map((_, index) => {
@@ -272,7 +286,7 @@ export default function LexiconRush() {
       <div className="flex gap-4">
         <button
           onClick={submitWord}
-          className="px-4 py-2 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md hover:from-red-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={selectedTiles.length < 2 || gameOver}
         >
           Submit Word
@@ -291,7 +305,7 @@ export default function LexiconRush() {
         </button>
         <button
           onClick={resetGame}
-          className="p-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          className="p-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md hover:from-red-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           title="Restart Game"
         >
           <img src="/restart.svg" alt="Restart" className="w-6 h-6" />
@@ -305,7 +319,7 @@ export default function LexiconRush() {
             <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
             <p className="text-xl mb-4">Your score: {score}</p>
             <button
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-md hover:from-red-600 hover:to-pink-600"
               onClick={resetGame}
             >
               Play Again
