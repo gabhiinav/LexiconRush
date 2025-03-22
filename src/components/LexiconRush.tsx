@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { wordsByLength } from "../dictionary";
 
 interface Tile {
   id: string;
@@ -22,124 +23,19 @@ export default function LexiconRush() {
   const [message, setMessage] = useState("");
   const [dictionary, setDictionary] = useState<Set<string>>(new Set());
 
-  // Load dictionary
+  // Load dictionary from dictionary.ts file
   useEffect(() => {
-    // In a real app, you would load a proper dictionary from an API or file
-    // For this demo, we'll use a small set of common words
-    const commonWords = new Set([
-      "cat",
-      "dog",
-      "the",
-      "and",
-      "for",
-      "you",
-      "are",
-      "this",
-      "that",
-      "have",
-      "with",
-      "from",
-      "they",
-      "will",
-      "what",
-      "when",
-      "make",
-      "like",
-      "time",
-      "just",
-      "know",
-      "take",
-      "people",
-      "year",
-      "your",
-      "good",
-      "some",
-      "could",
-      "them",
-      "see",
-      "other",
-      "than",
-      "then",
-      "now",
-      "look",
-      "only",
-      "come",
-      "its",
-      "over",
-      "think",
-      "also",
-      "back",
-      "after",
-      "use",
-      "two",
-      "how",
-      "our",
-      "work",
-      "first",
-      "well",
-      "way",
-      "even",
-      "new",
-      "want",
-      "because",
-      "any",
-      "these",
-      "give",
-      "day",
-      "most",
-      "play",
-      "game",
-      "word",
-      "find",
-      "lexicon",
-      "rush",
-      "board",
-      "letter",
-      "point",
-      "score",
-      "time",
-      "run",
-      "fun",
-      "sun",
-      "moon",
-      "star",
-      "sky",
-      "sea",
-      "land",
-      "tree",
-      "flower",
-      "water",
-      "fire",
-      "earth",
-      "wind",
-      "rain",
-      "snow",
-      "ice",
-      "hot",
-      "cold",
-      "warm",
-      "cool",
-      "red",
-      "blue",
-      "green",
-      "yellow",
-      "black",
-      "white",
-      "gray",
-      "brown",
-      "orange",
-      "purple",
-      "pink",
-      "gold",
-      "silver",
-      "bronze",
-      "metal",
-      "wood",
-      "stone",
-      "glass",
-      "paper",
-    ]);
-    setDictionary(commonWords);
+    // Create a Set from all words in the wordsByLength object
+    const allWords = new Set<string>();
+
+    // Iterate through each word length category and add words to the Set
+    Object.values(wordsByLength).forEach((wordsArray) => {
+      wordsArray.forEach((word) => {
+        allWords.add(word.toLowerCase());
+      });
+    });
+
+    setDictionary(allWords);
   }, []);
 
   // Generate a random letter with preference for vowels and common consonants
