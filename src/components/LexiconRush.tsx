@@ -286,7 +286,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
       <div className="flex gap-4">
         <button
           onClick={submitWord}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md hover:from-red-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={selectedTiles.length < 2 || gameOver}
         >
           Submit Word
@@ -298,14 +298,14 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
               prevTiles.map((tile) => ({ ...tile, selected: false }))
             );
           }}
-          className="px-4 py-2 bg-gray-700 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={selectedTiles.length === 0 || gameOver}
         >
           Clear
         </button>
         <button
           onClick={resetGame}
-          className="p-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-md hover:from-red-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          className="p-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           title="Restart Game"
         >
           <img src="/restart.svg" alt="Restart" className="w-6 h-6" />
@@ -319,7 +319,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
             <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
             <p className="text-xl mb-4">Your score: {score}</p>
             <button
-              className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-md hover:from-red-600 hover:to-pink-600"
+              className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800"
               onClick={resetGame}
             >
               Play Again
