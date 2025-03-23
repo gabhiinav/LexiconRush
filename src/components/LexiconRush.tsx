@@ -286,7 +286,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
       <div className="flex gap-4">
         <button
           onClick={submitWord}
-          className="px-4 py-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-lg min-w-[140px]"
           disabled={selectedTiles.length < 2 || gameOver}
         >
           Submit Word
@@ -298,7 +298,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
               prevTiles.map((tile) => ({ ...tile, selected: false }))
             );
           }}
-          className="px-4 py-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-lg min-w-[140px]"
           disabled={selectedTiles.length === 0 || gameOver}
         >
           Clear
