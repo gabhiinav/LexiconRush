@@ -40,9 +40,11 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
     setDictionary(allWords);
   }, []);
 
-  // Generate a random letter with preference for vowels and common consonants
+  // Generate a random letter with higher probability for vowels
   const getRandomLetter = () => {
-    const letters = "AAEIOUUBCDFGHJKLMNPQRSTVWXYZ";
+    // Increased vowel probability by adding more vowels to the distribution
+    // A, E, I, O, U appear multiple times to increase their probability
+    const letters = "AAAEEEIIIOOOUUBCDFGHJKLMNPQRSTVWXYZ";
     return letters.charAt(Math.floor(Math.random() * letters.length));
   };
 
