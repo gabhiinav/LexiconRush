@@ -271,7 +271,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
 
       {/* Current word */}
       <div className="mb-3 sm:mb-4 h-8">
-        <div className="text-lg sm:text-xl font-bold">
+        <div className="text-lg sm:text-xl font-bold text-center py-8">
           {selectedTiles.map((tile) => tile.letter).join("")}
         </div>
       </div>
