@@ -234,7 +234,12 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto">
       {/* Game board */}
-      <div className="grid grid-cols-6 gap-1 mb-4 w-full aspect-square bg-black p-2 rounded-lg border border-gray-800">
+      <div
+        className="grid gap-2 sm:gap-3 mb-4 w-full max-w-[95vw] sm:max-w-none"
+        style={{
+          gridTemplateColumns: `repeat(${BOARD_SIZE}, minmax(0, 1fr))`,
+        }}
+      >
         {Array.from({ length: BOARD_SIZE * BOARD_SIZE }).map((_, index) => {
           const row = Math.floor(index / BOARD_SIZE);
           const col = index % BOARD_SIZE;
@@ -244,14 +249,12 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
 
           return (
             <div
-              key={index}
-              className={`flex items-center justify-center rounded-md ${
-                tile ? "bg-gray-900" : "bg-black"
-              }`}
+              key={`${row}-${col}`}
+              className="aspect-square w-[48px] sm:w-[60px]"
             >
               {tile && (
                 <button
-                  className={`w-full h-full flex items-center justify-center text-xl font-bold rounded-md transition-colors ${
+                  className={`w-full h-full flex items-center justify-center text-lg sm:text-xl font-bold rounded-md transition-colors ${
                     tile.selected
                       ? "bg-green-600 text-white"
                       : "bg-gray-900 text-white hover:bg-gray-800"
@@ -267,16 +270,16 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
       </div>
 
       {/* Current word */}
-      <div className="mb-4 h-8">
-        <div className="text-xl font-bold">
+      <div className="mb-3 sm:mb-4 h-8">
+        <div className="text-lg sm:text-xl font-bold">
           {selectedTiles.map((tile) => tile.letter).join("")}
         </div>
       </div>
 
       {/* Message */}
-      <div className="mb-4 h-6 text-center">
+      <div className="mb-3 sm:mb-4 h-6 text-center">
         <div
-          className={`text-lg ${
+          className={`text-base sm:text-lg ${
             message.includes("+") ? "text-green-500" : "text-red-500"
           }`}
         >
@@ -285,10 +288,10 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
       </div>
 
       {/* Controls */}
-      <div className="flex gap-4">
+      <div className="flex gap-2 sm:gap-4">
         <button
           onClick={submitWord}
-          className="px-6 py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-lg min-w-[140px]"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-base sm:text-lg min-w-[120px] sm:min-w-[140px]"
           disabled={selectedTiles.length < 2 || gameOver}
         >
           Submit Word
@@ -300,7 +303,7 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
               prevTiles.map((tile) => ({ ...tile, selected: false }))
             );
           }}
-          className="px-6 py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-lg min-w-[140px]"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-base sm:text-lg min-w-[100px] sm:min-w-[140px]"
           disabled={selectedTiles.length === 0 || gameOver}
         >
           Clear
@@ -310,7 +313,11 @@ export default function LexiconRush({ onScoreChange }: LexiconRushProps = {}) {
           className="p-2 bg-gray-900 text-white font-bold rounded-md hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           title="Restart Game"
         >
-          <img src="/restart.svg" alt="Restart" className="w-6 h-6" />
+          <img
+            src="/restart.svg"
+            alt="Restart"
+            className="w-5 sm:w-6 h-5 sm:h-6"
+          />
         </button>
       </div>
 
