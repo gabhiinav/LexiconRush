@@ -30,15 +30,15 @@ export default function GameInstructions() {
             </h3>
             <ul className="list-disc pl-5 space-y-2">
               <li>Click letters to form words (minimum 2 letters)</li>
-              <li>Submit valid words to clear those letters from the board</li>
-              <li>New letters will flood the board over time</li>
+              <li>Submit valid words to clear those letters</li>
+              <li>New letters will appear over time</li>
               <li>Game ends when the board fills up completely</li>
               <li>Longer words score more points!</li>
             </ul>
             <div className="mt-4 text-sm text-gray-400">
               <p>
-                Scoring: 2-letter word = 1 point, 3-letter word = 2 points,
-                4-letter word = 4 points, etc.
+                Scoring: 2-letter word = 2 point, 3-letter word = 4 points,
+                4-letter word = 8 points, etc.
               </p>
             </div>
           </div>
