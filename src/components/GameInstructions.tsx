@@ -35,12 +35,12 @@ export default function GameInstructions() {
               <li>Game ends when the board fills up completely</li>
               <li>Longer words score more points!</li>
             </ul>
-            <div className="mt-4 text-sm text-gray-400">
+            {/* <div className="mt-4 text-sm text-gray-400">
               <p>
                 Scoring: 2-letter word = 2 point, 3-letter word = 4 points,
                 4-letter word = 8 points, etc.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
