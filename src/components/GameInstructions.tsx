@@ -29,7 +29,7 @@ export default function GameInstructions() {
               Lexicon Rush - Game Rules
             </h3>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Click letters to form words (minimum 2 letters)</li>
+              <li>Click letters to form words</li>
               <li>Submit valid words to clear those letters</li>
               <li>New letters will appear over time</li>
               <li>Game ends when the board fills up completely</li>
